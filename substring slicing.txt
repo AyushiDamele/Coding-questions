@@ -1,0 +1,20 @@
+You are given a string . Now, you can cut the string into two parts such that each part is the substring of the string  and is non-empty. Now, you can form a new string by arranging these two parts in any order. Print YES if it is possible to cut the string into two parts and then rearrange them to form a palindrome otherwise print NO.
+
+Input Format
+The first line contains an integer  that denote the total number of test cases.
+The first line of each test case contains a string .
+
+Output Format
+For each test case, print YES  or NO in a new line.
+
+Constraints
+
+Sample Input
+2
+abbavv
+apple
+Sample Output
+YES
+NO
+Explanation
+Sample test case : Choose the first substring as abbav and second substring as v. Now, you arrange them as v + abbav that will form the string vabbav which is a palindrome.
