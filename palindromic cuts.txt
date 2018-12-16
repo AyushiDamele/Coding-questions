@@ -1,0 +1,39 @@
+Given a string  of length . Now, you need to cut the string  into  non-empty substrings by performing  cuts. There are lots of ways of performing the cuts in the string . For every way of performing the cuts, you need to count how many substrings will be a palindrome in that way of cut. You need to sum this count over all possible ways of cutting the string .
+
+Input Format
+
+The first line contains two integers  and  as input.
+The second line contains the string  as input.
+
+Output Format
+
+In the output, you need to print the sum modulo .
+
+Constraints
+2<=N<=5000
+1<=K<=N-1 
+
+
+String  contains only lowercase english alphabets
+
+Sample Input
+5 2
+aabbc
+Sample Output
+12
+Explanation
+In the given test case there are  ways to perform the cuts. All the ways are described below.
+
+a | a | bbc = 2 substrings are palindrome
+
+a | ab | bc =1  substring is palindrome
+
+a | abb | c =2  substrings are palindrome
+
+aa | b | bc =2  substrings are palindrome
+
+aa | bb | c =3  substrings are palindrome
+
+aab | b | c =2  substrings are palindrome
+
+So, the output is 2+1+2+2+3+2=12. 
