@@ -1,2 +1,2 @@
 # Coding-questions
-Practiced questions ad their solutions
+Practiced questions and their solutions
