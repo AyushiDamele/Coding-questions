@@ -1,0 +1,41 @@
+csv file: project1.csv
+Sally Whittaker,2018,McCarren House,312,3.75
+Belinda Jameson,2017,Cushing House,148,3.52
+Jeff Smith,2018,Prescott House,17-D,3.20
+Sandy Allen,2019,Oliver House,108,3.48
+
+
+solution:
+
+#include <fstream>
+#include <iostream>
+#include <stdio.h>
+#include <conio.h>
+using namespace std;
+int main() {
+   ifstream file( "project1.csv" );
+   if ( ! file.is_open() ) {
+      cout <<" Failed to open" << endl;
+   }
+   else {
+      //char word[10];
+      //file>>word;
+      string ID,nome,idade,genero;
+    while(file.good())
+    {
+    getline(file, ID, ',');
+    cout << "ID: " <<ID<<" " ;
+
+    getline(file, nome, ',') ;
+    cout << "User: " << nome << " " ;
+
+    getline(file, idade, ',') ;
+    cout << "Idade: " << idade << " "  ;
+
+    getline(file, genero) ;
+    cout << "Sexo: " <<  genero<<endl;
+
+      }
+   }
+   getchar();
+}
