@@ -1,0 +1,81 @@
+"Alfred" Rebel's cute but innovative personal butler bot, decides to play a game to give us some relief from being too awesome in our day to day operations. He would be giving us two strings and would ask us to make them identical, using the minimum actions possible of the following types:
+
+Select any character in any of the strings and repeat it (add another instance of this character exactly after it). For example, in a single move "abc" could be changed to "abbc" (by repeating the character 'b').
+Select any two adjacent and identical characters in any of the strings, and delete one of them.
+For example, in a single move, "abbc" could be changed to "abc" (delete one of the 'b' characters), but can't convert it to "bbc".
+The  actions are independent i.e. it's not necessary that an act of the first type should be followed by an action of the second type (or vice versa).
+We decided to beat Alfred by writing a program to find if it is possible to make the given strings identical and to find the minimum number of moves if it is possible or print "Not possible" if the solution is not possible to derive.
+
+Write a function:
+
+function solution (string A, string B) {} that given 2 strings A and B, returns the minimum no. of tasks required to do so and "Not possible" if the solution is not possible to derive.
+
+Input Format
+Input would be the 2 strings in consideration one in each line. Each string is non-empty and will consist of lower case English characters only, from 'a' to 'z'.
+
+Output Format 
+If the two strings could be made identical print the minimum no. of tasks required to do so and "Not possible" if the solution is not possible to derive.
+
+Constraints
+
+Sample Input
+rebel
+reebel
+Sample Output
+1
+Explanation
+You can increase one e in rebel to make it reebel.
+
+#soluion
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string a,b;
+    cin >> a>> b;
+    int c1,c2,c,i,j;
+    char s;
+    int n,m;
+    bool ispossible=true;
+    n=a.length(),m=b.length();
+    s=a[0];
+    i=0,j=0,c=0;
+    while(i<n && j<m)
+    {
+        c1=0,c2=0;
+        s=a[i];
+        while(i<n && a[i]==s)
+        {
+            i++;
+            c1++;
+        }
+        while(j<m && b[j]==s)
+        {
+            j++;
+            c2++;
+        }
+        if(c1==0|| c2==0)
+        {
+            ispossible=false;
+            break;
+        }
+        else
+        {
+            c+=abs(c1-c2);
+        }
+    }
+    if(ispossible==false)
+    {
+        cout <<"Not possible"<<endl;
+    }
+    else if(i!=n || j!=m)
+    {
+        cout <<"Not possible"<<endl;
+    }
+    else
+    {
+        cout << c<< endl;
+    }
+    return 0;
+}
