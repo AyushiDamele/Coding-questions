@@ -1,0 +1,77 @@
+Given an sorted array A of size N. Find number of elements which are less than or equal to given element X.
+
+Input:
+The first line of input contains an integer T denoting the number of test cases. Then T test cases follow. Each testcase contains 3 lines of input. The first line contains an integer N denoting the size of the array. Then the next line contains N space separated integers forming the array. The third line contains an element X.
+
+Output:
+For each testcase, in a new line, print the number of elements which are less than or equal to given element.
+
+Constraints:
+1 <= T <= 105
+1 <= N <= 105
+1 <= Ai <= 105
+0 <= X <= 105
+
+Example:
+Input:
+2
+6
+1 2 4 5 8 10
+9
+7
+1 2 2 2 5 7 9
+2
+Output:
+5
+4
+
+#solution
+
+#include<bits/stdc++.h>
+using namespace std;
+int bsearch(int low,int high,int x,int a[]);
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int i,j,k,count=0,n;
+        cin >> n;
+        int a[n];
+        for(i=0;i<n;i++)
+        {
+            cin >> a[i];
+        }
+        cin >> k;
+        int index=bsearch(0,n-1,k,a);
+        cout <<index+1<<endl;
+    }
+}
+int bsearch(int low,int high,int x,int a[])
+{
+    while(high-low>=0)
+    {
+        int mid=low+((high-low)/2);
+       /* if(a[mid]==x)
+        {
+            return mid;
+        }*/
+        if(a[mid]>x)
+        {
+            high=mid-1;
+        }
+        else
+        {
+            low=mid+1;
+        }
+    }
+    if(a[high]<=x)
+    {
+        return high;
+    }
+    else
+    {
+        return low;
+    }
+}
