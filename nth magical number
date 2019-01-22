@@ -1,0 +1,30 @@
+https://www.geeksforgeeks.org/find-nth-magic-number/
+
+#solution
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        long long ans=0,i=0,po=1;
+        while(n)
+        {
+            if(n&1==1)
+            {
+                ans=ans+po*1;
+            }
+            n=n>>1;
+            po=po*5;
+            i++;
+        }
+        cout << ans<<endl;
+    }
+   
+    return 0;
+}
