@@ -1,0 +1,19 @@
+int getCeil(int a[],int low,int high,int x)
+{
+    int Ceil,mid;
+    while(low<=high)
+    {
+        mid=(low+high)/2;
+        if(a[mid]==x){ return mid; }
+        else if(a[mid] > x)
+        {
+            Ceil=mid;
+            high=mid-1;
+        }
+        else
+        {
+            low=mid+1;
+        }
+    }
+    return Ceil;
+}
