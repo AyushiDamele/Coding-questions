@@ -1,0 +1,83 @@
+https://leetcode.com/problems/trapping-rain-water/
+
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.
+
+
+The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped. Thanks Marcos for contributing this image!
+
+Example:
+
+Input: [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+
+#solution: Find the first greater element in the left and in the right of each element. If there lies both the left greater and the right greater
+element then only the water will be stored. and for the elements which have the same pair of leftgreater element and rightgreater element
+only one of them will be considered for area calculation.
+
+#include<bits/stdc++.h>
+using namespace std;
+#include <unordered_set>
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n=height.size(),i,j,k;
+        int lefth[n+1],righth[n+1],area=0;
+        stack<int> s;
+        i=0;
+        while(i<n)
+        {
+            while(s.empty()==0 && height[s.top()]< height[i])
+            {
+                s.pop();
+            }
+            if(s.empty())
+            {
+                lefth[i]=-1;
+            }
+            else if( height[s.top()]==height[i] )
+            {
+                lefth[i]=-1;
+                s.pop();
+            }
+            else{ lefth[i]=s.top(); }
+            s.push(i);
+            i++;
+        }
+        while(s.empty()==0){ s.pop(); }
+        i=n-1;
+        while(i>=0)
+        {
+          
+            while(s.empty()==0 && height[s.top()]< height[i])
+            {
+                s.pop();
+            }
+            if(s.empty())
+            {
+                righth[i]=-1;
+            }
+            else if(height[s.top()]==height[i])
+            {
+                righth[i]=righth[s.top()];
+                righth[s.top()]=-1;
+                s.pop();
+            }
+            else{ righth[i]=s.top(); }
+            s.push(i);
+            i--;
+        }
+      
+        for(i=0;i<n;i++)
+        {
+            if(lefth[i]==-1 || righth[i]==-1)
+            {  continue; }
+            if(i>0 && lefth[i-1]==lefth[i] && righth[i-1]==righth[i]){ continue; }
+            else
+            {
+        
+                area =area + (min(height[lefth[i]] , height[righth[i]])-height[i]) * (righth[i]-lefth[i]-1);
+            }
+        }
+        return area;
+    }
+};
