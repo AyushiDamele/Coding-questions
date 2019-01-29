@@ -1,0 +1,16 @@
+int getfloor(int a[],int low,int high,int x)
+{
+    int floor,mid;
+    while(low<=high)
+    {
+        mid=(low+high)/2;
+        if(a[mid]==x){ return mid; }
+        else if(a[mid] > x){ high=mid-1; }
+        else
+        {
+            floor=mid;
+            low=mid+1;
+        }
+    }
+    return floor;
+}
