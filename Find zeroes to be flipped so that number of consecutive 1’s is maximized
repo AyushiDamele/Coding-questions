@@ -1,0 +1,72 @@
+https://www.geeksforgeeks.org/find-zeroes-to-be-flipped-so-that-number-of-consecutive-1s-is-maximized/
+
+Given a binary array A of size N and an integer M. Find the maximum number of consecutive 1's produced by flipping at most M 0's.
+
+Input:
+The first line contains an integer T denoting the total number of test cases. In each test cases, the first line contains an integer N denoting the size of array. The second line contains N space-separated integers A1, A2, ..., AN denoting the elements of the array.  Third line consists of an integer m that is maximum number of flips allowed.
+
+Output:
+Output the maximum numbers of consecutive 1's.
+
+Constraints:
+1 <= T <= 103
+1 <= N <= 107
+0 <= M <= N
+0 <= Ai <= 1
+
+Example:
+Input:
+1
+11
+1 0 0 1 1 0 1 0 1 1 1
+2
+
+Output:
+8
+
+Explanation:
+Testcase 1: Maximum subarray is of size 8 which can be made subarray of all 1 after flipping two zeros to 1.
+
+#solution
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n,m,i,zs,ze,s,e;
+        cin >>n;
+        int a[n],z[n],count=0;
+        for(i=0;i<n;i++)
+        {
+            cin >> a[i];
+            if(a[i]==0)
+            {
+                z[count]=i;
+                count++;
+            }
+        }
+        cin >> m;
+        s=0,e=n-1,zs=0,ze=count-1;
+        int maxlen=0,curlen=0;
+        
+        if(m>=count)
+        {
+            maxlen=e-s+1;
+        }
+        for(i=0;i<=count-m && i<n;i++)
+        {
+            e=n-1,s=0;
+            zs=i;
+            ze=i+m-1;
+            if(zs>0){s= z[zs-1]+1; }
+            if(ze<count-1){ e=z[ze+1]-1;  }
+            maxlen= max(maxlen, e-s+1);
+        }
+        cout << maxlen<<endl;
+    }
+    return 0;
+}
