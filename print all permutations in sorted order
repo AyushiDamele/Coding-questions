@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+set<string> set1;
+void dfs(string cur,int index,int len,string s,bool visited[])
+{
+    if(cur.length()==len && set1.find(cur)==set1.end())
+    {
+        cout<< cur<<" ";
+        set1.insert(cur);
+        return;
+    }
+    for(int i=0;i<len;i++)
+    {
+        if(visited[i]==false)
+        {
+            visited[i]=true;
+            dfs(cur+s[i],i,len,s,visited);
+            visited[i]=false;
+        }
+    }
+}
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        string s;
+        cin >> s;
+        int i,index,j,len,curlen=0;
+        string p="";
+        len=s.length();
+        bool visited[len];
+        sort(s.begin(),s.end());
+
+        for(i=0;i<len;i++)
+        {
+            for(j=0;j<len;j++)
+            {
+                visited[j]=false;
+            }
+            visited[i]=true;
+            dfs(p+s[i],i,len,s,visited);
+        }
+        cout << endl;
+    }
+    return 0;
+}
