@@ -1,0 +1,106 @@
+https://practice.geeksforgeeks.org/problems/merge-two-bst-s/1
+
+Given two BST, Your task is to complete the function merge which  prints the elements of both BSTs in sorted form.
+
+Input:
+The first line of input contains an integer T denoting the no of test cases. Then T test cases follow. Each test case contains three lines. The first line of each test case contain's an integer N and M denoting the size of the two BST's. Then In the next two line are space separated values of the two BST's.
+
+Output:
+The function should print the elements of both BST's in sorted form.
+
+Constraints:
+1<=T<=100
+1<=N,M<=100
+
+Example(To be used only for expected output):
+Input:
+2
+3 3
+1 33 4 
+6 7 1
+2 2
+1 6
+9 2
+Output:
+1 1 4 6 7 33
+1 2 6 9
+
+#solution
+
+void merge(Node *root1, Node *root2)
+{
+   //Your code here
+   stack<Node*> s1,s2;
+   while(1)
+   {
+       while(root1)
+       {
+           s1.push(root1);
+           root1=root1->left;
+       }
+       while(root2)
+       {
+           s2.push(root2);
+           root2=root2->left;
+       }
+       if(s1.empty()==0 && s2.empty()==0)
+       {
+           Node* x1=s1.top();
+           Node* x2=s2.top();
+           if(x1->data < x2->data)
+           {
+               cout << x1->data<<" ";
+               s1.pop();
+               root1=x1->right;
+           }
+           else
+           {
+               cout << x2->data<<" ";
+               s2.pop();
+               root2=x2->right;
+           }
+       }
+       else
+       {
+           break;
+       }
+   }
+   while(1)
+   {
+       while(root1)
+       {
+           s1.push(root1);
+           root1=root1->left;
+       }
+       if(s1.empty()==0 )
+       {
+           Node* x1=s1.top();
+           cout << x1->data<<" ";
+           s1.pop();
+           root1=x1->right;
+       }
+       else
+       {
+           break;
+       }
+   }
+   while(1)
+   {
+       while(root2)
+       {
+           s2.push(root2);
+           root2=root2->left;
+       }
+       if(s2.empty()==0 )
+       {
+           Node* x2=s2.top();
+           cout << x2->data<<" ";
+           s2.pop();
+           root2=x2->right;
+       }
+       else
+       {
+           break;
+       }
+   }
+}
