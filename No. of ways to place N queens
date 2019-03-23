@@ -1,0 +1,94 @@
+https://leetcode.com/problems/n-queens-ii/
+
+The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+
+
+
+Given an integer n, return the number of distinct solutions to the n-queens puzzle.
+
+Example:
+
+Input: 4
+Output: 2
+Explanation: There are two distinct solutions to the 4-queens puzzle as shown below.
+[
+ [".Q..",  // Solution 1
+  "...Q",
+  "Q...",
+  "..Q."],
+
+ ["..Q.",  // Solution 2
+  "Q...",
+  "...Q",
+  ".Q.."]
+]
+
+#solution
+
+bool issafe(int c[100][100], int n,int j,int k)
+{
+    int a,b;
+    for(a=0;a<n;a++)
+    {
+        if(c[j][a]==1){ return false; }
+    }
+    for(b=0;b<n;b++)
+    {
+        if(c[b][k]==1){ return false; }
+    }
+    for(a=j-1,b=k-1;a>=0 && b>=0;a--,b--)
+    {
+        if(c[a][b]==1){ return false;  }
+    }
+    for(a=j-1,b=k+1;a>=0 && b<n ;a--,b++)
+    {
+        if(c[a][b]==1){ return false;  }
+    }
+    for(a=j+1,b=k-1; a<n && b>=0;a++,b--)
+    {
+        if(c[a][b]==1){ return false;  }
+    }
+    for(a=j+1,b=k+1;a<n && b<n;a++ , b++)
+    {
+        if(c[a][b]==1){ return false;  }
+    }
+    return true;
+}
+
+void checkqueens(int c[100][100],int n,int row,int &count)
+{
+    int i,j,k;
+    if(row==n)
+    {
+        count++;
+        return;
+    }
+// assigining queen in every column of each row
+    for(k=0;k<n;k++)
+    {
+        if(c[row][k]==0 && issafe(c,n,row,k)== true)
+        {
+            c[row][k]=1;
+            checkqueens(c,n,row+1,count);
+            c[row][k]=0;
+        }
+    }
+}
+
+class Solution {
+public:
+    int totalNQueens(int n) {
+        
+        int count=0, i,j,k,l;
+        int c[100][100];
+        for(j=0;j<n;j++)
+        {
+            for(k=0;k<n;k++)
+            {
+                c[j][k]=0;
+            }
+        } 
+        checkqueens(c,n,0,count);
+        return count;
+    }
+};
