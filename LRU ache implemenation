@@ -1,0 +1,46 @@
+#printing the number of page faults . pushing the elements a the end of the list and removing from front.
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        //cout <<"hi ";
+        int n,i,j,k,msize,used=0,pgfaults=0;
+        cin >> n;
+        int a[n];
+        for(i=0;i<n;i++)
+        {
+            cin >> a[i];
+        }
+        cin >>msize;
+        list<int> l;
+        unordered_map<int,list<int> ::iterator> u;
+        for(i=0;i<n;i++)
+        {
+            if(u.find(a[i])==u.end())
+            {
+                pgfaults++;
+                if(l.size() == msize)
+                {
+                   u.erase(l.front());
+                   l.pop_front();
+                }
+                
+            }
+            else
+            {
+                l.erase(u[a[i]]);
+            }
+            l.push_back(a[i]);
+            u[a[i]]=--l.end();
+         
+            
+        }
+        cout << pgfaults<<endl;
+    }
+    return 0;
+}
