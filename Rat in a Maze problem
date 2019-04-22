@@ -1,0 +1,102 @@
+https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1
+
+#solution
+
+{
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 100
+vector<string> printPath(int m[MAX][MAX], int n);
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--){
+	int n;
+	cin>>n;
+	
+	int m[100][100];
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			cin>>m[i][j];
+		}
+	}
+	
+	vector<string> res = printPath(m,n);
+	for(int i=0;i<res.size();i++)
+	cout<<res[i]<<" ";
+	cout<<endl;
+}
+	return 0;
+}
+
+}
+
+/*Please note that it's Function problem i.e.
+you need to write your solution in the form of Function(s) only.
+Driver Code to call/invoke your function is mentioned above.*/
+
+/*The function returns a sorted array of strings which represents
+the directions mouse will take to reach the destination.
+You are required to complete the below method. */
+void findpath(vector<string>&ans,int sr,int sc,string cur,int er,int ec,int m[MAX][MAX],int n,int visit[MAX][MAX])
+{
+    if(sr==er && sc==ec)
+    {
+        ans.push_back(cur);
+        return ;
+    }
+    visit[sr][sc]=1;
+    int nr,nc;
+    nr=sr+1,nc=sc;
+    if(nr<n && m[nr][nc]==1 && visit[nr][nc]==0)
+    {
+        findpath(ans,nr,nc,cur+"D",er,ec,m,n,visit);
+    }
+    nr=sr,nc=sc+1;
+    if(nc< n && m[nr][nc]==1 && visit[nr][nc]==0)
+    {
+        findpath(ans,nr,nc,cur+"R",er,ec,m,n,visit);
+    }
+    nr=sr-1,nc=sc;
+    if(nr>=0 && m[nr][nc]==1 && visit[nr][nc]==0)
+    {
+        findpath(ans,nr,nc,cur+"U",er,ec,m,n,visit);
+    }
+    nr=sr,nc=sc-1;
+    if(nc >=0 && m[nr][nc]==1 && visit[nr][nc]==0)
+    {
+        findpath(ans,nr,nc,cur+"L",er,ec,m,n,visit);
+    }
+    visit[sr][sc]=0;
+}
+vector<string> printPath(int m[MAX][MAX], int n)
+{
+    //Your code here
+    int visit[MAX][MAX],i,j;
+    for(i=0;i<MAX;i++)
+    {
+        for(j=0;j<MAX;j++)
+        {
+            visit[i][j]=0;
+        }
+    }
+    vector<string> ans;
+    string cur="";
+    int nr,nc,sr=0,sc=0,er=n-1,ec=n-1;
+    visit[0][0]=1;
+    nr= sr+1,nc=sc+0;
+    if(nr<n && m[nr][nc]==1 )
+    {
+        findpath(ans,nr,nc,cur+"D",er,ec,m,n,visit);
+    }
+    nr=sr,nc=sc+1;
+    if(nc< n && m[nr][nc]==1)
+    {
+       findpath(ans,nr,nc,cur+"R",er,ec,m,n,visit);
+    }
+    sort(ans.begin(),ans.end());
+   return ans;
+}
