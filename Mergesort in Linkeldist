@@ -1,0 +1,145 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+   int data;
+   node *next;
+};
+void insertinlist(int value,node** ptrroot);
+void printlist(node *root);
+void splitlist(node *head, node **ptra, node **ptrb );
+node* mergelist(node **ptra, node **ptrb);
+void mergesort(node **ptrroot);
+void insertinlist(int value,node** ptrroot)
+{
+ //   cout <<*ptrroot<<" ";
+    node* newnode=(node*)malloc(sizeof(node));
+    newnode->data=value;
+    newnode->next=0;
+    if(*ptrroot==0){ *ptrroot=newnode; }
+    else
+    {
+        node *root=*ptrroot;
+        while(root->next!=0)
+        {
+            root=root->next;
+        }
+        root->next=newnode;
+    }
+
+}
+void printlist(node *root)
+{
+    node *p=root;
+    while(p)
+    {
+        cout << p->data<<" ";
+        p=p->next;
+    }
+    cout << endl;
+}
+void splitlist(node *head, node **ptra, node **ptrb )
+{
+    if(head==0){ return ; }
+    node *slow=head,*fast=head->next;
+    while(fast!=0 && fast->next!=0)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    *ptra= head;
+    *ptrb=slow->next;
+     slow->next=0;
+}
+node* mergelist(node **ptra, node **ptrb)
+{
+    node *a=*ptra;
+    node *b=*ptrb;
+    node *mergeroot=0,*cur=0;
+    while(a!=0 && b!=0)
+    {
+        if(mergeroot==0)
+        {
+            if(a->data<b->data)
+            {
+                 mergeroot=a;
+                 cur=a;
+                 a=a->next;
+            }
+            else
+            {
+                mergeroot=b;
+                cur=b;
+                b=b->next;
+            }
+        }
+        else
+        {
+            if(a->data<b->data)
+            {
+                cur->next=a;
+                cur=cur->next;
+                a=a->next;
+            }
+            else
+            {
+                cur->next=b;
+                cur=cur->next;
+                b=b->next;
+            }
+        }
+    }
+    while(a!=0)
+    {
+        if(mergeroot==0)
+        {
+            mergeroot=a;
+            cur=a;
+            a=a->next;
+        }
+        else
+        {
+            cur->next=a;
+            cur=cur->next;
+            a=a->next;
+        }
+    }
+    while(b!=0)
+    {
+        if(mergeroot==0)
+        {
+            mergeroot=b;
+            cur=b;
+            b=b->next;
+        }
+        else
+        {
+            cur->next=b;
+            cur=cur->next;
+            b=b->next;
+        }
+    }
+    return mergeroot;
+}
+void mergesort(node **ptrroot)
+{
+    node *head=*ptrroot;
+    if(head==0 || head->next==0){  return ; }
+    node *a=0,*b=0;
+    splitlist(head,&a,&b);
+    mergesort(&a);
+    mergesort(&b);
+    *ptrroot=mergelist(&a,&b);
+}
+int main()
+{
+    node *root=0;
+    insertinlist(4,&root);
+    insertinlist(9,&root);
+    insertinlist(2,&root);
+    insertinlist(1,&root);
+    insertinlist(7,&root);
+    printlist(root);
+    mergesort(&root);
+    printlist(root);
+}
