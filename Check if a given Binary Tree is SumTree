@@ -35,7 +35,7 @@ Output:
 1
 0
 
-There are two test cases.  First case represents a tree with 3 nodes and 2 edges where root is 3, left child of 3 is 1 and right child of 3 is 2.   Second test case represents a tree with 4 edges and 5 nodes.
+There are two test cases.  First case represents a  tree with 3 nodes and 2 edges where root is 3, left child of 3 is 1 and right child of 3 is 2.   Second test case represents a tree with 4 edges and 5 nodes.
 
 
 #solution
