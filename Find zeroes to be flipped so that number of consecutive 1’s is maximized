@@ -33,7 +33,7 @@ Testcase 1: Maximum subarray is of size 8 which can be made subarray of all 1 af
 using namespace std;
 int main()
 {
-    int t;
+    int t ;
     cin >> t;
     while(t--)
     {
