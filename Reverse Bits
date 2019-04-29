@@ -33,7 +33,7 @@ using namespace std;
 #define ll long long
 
 int main() {
-	//code
+	
 	int t;
 	cin >> t;
 	while(t--)
