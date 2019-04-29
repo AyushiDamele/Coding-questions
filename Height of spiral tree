@@ -13,7 +13,7 @@ For Example:
 In the above binary tree, 6, 5 and 3 are leaf nodes and they form a circular doubly linked list. Here, the left pointer of leaf node will act as a previous pointer of circular doubly linked list and its right pointer will act as next pointer of circular doubly linked list.
 
 Input:
-The first line of input contains T, denoting the number of testcases. Each testcase contains one line i.e. N(number of edges).
+The first line of input contains T,denoting the number of testcases. Each testcase contains one line i.e. N(number of edges).
 
 Output:
 For each testcase in new line, print the height of spiral tree.
