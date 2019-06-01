@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+    int data;
+    node *next;
+};
+
+node* add(node *head1,int &carry)
+{
+    node *newhead=0;
+    int sum;
+    if(head1->next!=0)
+    {
+        newhead=add(head1->next,carry);
+    }
+    else
+    {
+        node *newnode=(node*)malloc(sizeof(node));
+        sum=head1->data+1;
+        if(sum>9)
+        {
+            carry=sum/10;
+            sum=sum%10;
+        }
+        else{ carry=0; }
+        newnode->data=sum;
+        newnode->next=newhead;
+        newhead=newnode;
+        return newhead;
+    }
+    node *newnode=(node*)malloc(sizeof(node));
+    sum=head1->data+carry;
+    if(sum>9)
+    {
+        carry=sum/10;
+        sum=sum%10;
+    }
+    else{ carry=0; }
+    newnode->data=sum;
+    newnode->next=newhead;
+    newhead=newnode;
+    return newhead;
+}
+int main()
+{
+    int num1,num2,sum,carry=0,k;
+    cin >> num1>> num2;
+    node *head1=0;
+    while(num1)
+    {
+        k=num1%10;
+        num1=num1/10;
+        node *newnode=(node*)malloc(sizeof(node));
+        newnode->data=k;
+        newnode->next=head1;
+        head1=newnode;
+    }
+    node *newhead=0;
+    newhead=add(head1,carry);
+    while(newhead)
+    {
+        cout << newhead->data;
+        newhead=newhead->next;
+    }
+}
+
