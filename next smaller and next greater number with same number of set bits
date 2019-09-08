@@ -1,0 +1,82 @@
+https://www.geeksforgeeks.org/closest-next-smaller-greater-numbers-number-set-bits/
+
+#solution
+
+import java.util.*;
+import java.lang.*;
+import java.lang.Math;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+   public static void main(String []args)
+   {
+       Scanner s= new Scanner(System.in);
+       int num=s.nextInt();
+       Codechef c=new Codechef();
+       int lower= c.findlower(num);
+       int higher=c.findhigher(num);
+       System.out.println(lower+ " "+higher);
+   }
+   private int findlower(int num)
+   {
+      if((num&(num+1))==0)
+      {
+          return -1;
+      }
+      else
+      {
+          int m=0;
+          boolean seenzero=false;
+          int x=num;
+          while(x > 0)
+          {
+              if((x&1)==0)
+              {
+                  seenzero=true;
+              }
+              else
+              {
+                  if(seenzero==true)
+                  {
+                    num = num &(~(1 <<m));
+                    num=num | (1<<(m-1));
+                    break;
+                  }
+              }
+              m++;
+              x=x>>>1;
+          }
+          return num;
+      }
+   }
+  
+   private int findhigher(int num)
+   {
+      int m=0;
+      boolean seenone=false;
+      int x=num;
+      if(x==0 || x> (1<<30)){return -1;}
+      if(num==0){ return 0; }
+      else
+      {
+          while(x>=0)
+          {
+               if((x & 1)==1)
+              {
+                  seenone=true;
+              }
+              else
+              {
+                  num=num & ~(1<<(m-1));
+                  num=num | (1<<m);
+                  break;
+              }
+              m++;
+              x=x >>> 1;
+          }
+         return num;
+      }
+  }
+}
