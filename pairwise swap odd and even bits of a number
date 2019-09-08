@@ -1,0 +1,39 @@
+https://www.geeksforgeeks.org/swap-all-odd-and-even-bits/
+
+#solution
+
+/* package codechef; // don't place package name! */
+// creating a linked list
+import java.util.*;
+import java.lang.*;
+import java.lang.Math;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+   public static void main(String []args)
+   {
+       int t;
+       Scanner s=new Scanner(System.in);
+       t=s.nextInt();
+       Codechef c=new Codechef();
+       while(t-- >0)
+       {
+           int num=s.nextInt();
+           int ans=c.swapbits(num);
+           System.out.println(ans);
+       }
+       
+   }
+  private int swapbits(int num)
+  {
+      int evenmask=0x55555555;
+      int oddmask= 0xAAAAAAAA;
+      int evennum= evenmask&num;
+      int oddnum= oddmask&num;
+      evennum=  evennum<<1;
+      oddnum= oddnum >>1;
+      return (evennum|oddnum) ;
+  }
+}
