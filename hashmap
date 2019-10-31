@@ -1,0 +1,68 @@
+https://practice.geeksforgeeks.org/problems/count-pairs-with-given-sum/0
+
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+{
+   public static void main(String [] args)throws IOException{
+        int t;
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        String s1=br.readLine();
+        String temp1[]=s1.trim().split(" ");
+        t=Integer.parseInt(temp1[0]);
+        while(t-->0)
+        {
+           int n=0;
+           int reqsum=0;
+           int i=0;
+           int j=0;
+           int ans=0;
+           int diff=0; 
+           String s[]=br.readLine().trim().split(" ");
+           n=Integer.parseInt(s[0]);
+           reqsum=Integer.parseInt(s[1]);
+           String temp[]=br.readLine().trim().split(" ");
+           int numbers[]=new int[n];
+           j=0;
+            for(i=0;i<temp.length;i++)
+            { 
+                if(temp[i].equals("")){ continue; }
+                numbers[j]=Integer.parseInt(temp[i].trim());
+              //  System.out.print(numbers[j]+" ");
+                j++;
+            } 
+            HashMap<Integer,Integer> map=new HashMap<>();
+            for(i=0;i<n;i++)
+            {
+               if(map.containsKey(numbers[i])==false)
+                {  map.put(numbers[i],1);   }
+               else {   map.replace(numbers[i],map.get(numbers[i])+1);    }    
+            } 
+            
+          /*  Iterator mapiterator= map.entrySet().iterator();
+            while(mapiterator.hasNext()==true)
+            {
+                 Map.Entry mapelement=(Map.Entry)mapiterator.next();
+                 int value=(int)mapelement.getValue();
+                 int key=(int)mapelement.getKey();
+                 System.out.print(key+ " "+value+" # ");
+            }
+           */
+            for(i=0;i<n;i++)
+            {
+               diff = reqsum - numbers[i];
+               if(map.containsKey(diff)==true)
+              {
+                  if(diff==numbers[i] && map.get(diff)>1){    ans+= map.get(diff)-1;     }
+                  else 
+                  {    ans  += map.get(diff);   } 
+              }
+             }
+            ans=ans/2;
+            System.out.println(ans);
+       }
+            
+   }
+}
