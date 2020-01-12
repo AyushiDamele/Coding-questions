@@ -1,0 +1,51 @@
+
+class Solution {
+	int rows[]= {0,-1,0,1};
+	int cols[]= {-1,0,1,0};
+	boolean dfs(char[][] board, String word, int index,int rowidx, int colidx){
+		if(!(rowidx>=0 && rowidx< board.length && colidx>=0 && colidx < board[0].length 
+				&& board[rowidx][colidx]!='\0')) {
+			return false;
+		}
+		if(board[rowidx][colidx] != word.charAt(index)) { return false; }
+		board[rowidx][colidx]='\0';
+		if( index == word.length()-1) {
+			return true;
+		}
+		for(int i=0;i<4;i++)
+		{
+			int newrow= rowidx + rows[i];
+			int newcol= colidx + cols[i];
+			if(dfs(board, word,index+1,newrow,newcol)==true) {return true; }
+		}
+		board[rowidx][colidx]=word.charAt(index);
+		return false;
+	}
+	
+	
+	public boolean exist(char[][] board, String word) {
+    	if(word.length()==0) {return true;}
+        int rowcount=board.length;
+        if(rowcount==0) {return false; }
+        int colcount= board[0].length;
+        boolean isPresent=false;
+        for(int i=0;i<rowcount;i++) {
+        	for(int j=0;j<colcount;j++) {
+        		if(board[i][j]== word.charAt(0)) {
+        			isPresent= dfs(board,word,0, i, j);
+        			if(isPresent == true) {
+        				return true;
+        			}
+        		}
+        	}
+        }
+        return false;
+    }
+    
+	public static void main(String []args) {
+		Solution obj=new Solution();
+		System.out.println(obj.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "ABCCED"));
+		System.out.println(obj.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "SEE"));
+		System.out.println(obj.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "ABCB"));
+	}
+}
